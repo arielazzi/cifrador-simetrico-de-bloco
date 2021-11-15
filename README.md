@@ -2,15 +2,15 @@
 
 ## To-do:
 
-- [ ] O algoritmo de key scheduling (geração de subchaves)
+- [ ] **O algoritmo de key scheduling (geração de subchaves)**
     - [ ] Definição
     - [ ] Implementação
     - [ ] Documentação
-- [ ] O algoritmo de ciframento e deciframento
+- [ ] **O algoritmo de ciframento e deciframento**
     - [ ] Definição
     - [ ] Implementação
     - [ ] Documentação
-- [ ] O algoritmo de modo de operação CBC
+- [ ] **O algoritmo de modo de operação CBC**
     - [ ] Definição
     - [ ] Implementação
     - [ ] Documentação
