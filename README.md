@@ -2,10 +2,9 @@
 
 ## To-do:
 
-- [ ] Setup
-- [ ] Carregar o arquivo como bin
-- [ ] Coletar valor da chave
-- [ ] Ler o arquivo a cada 48 bits 
+- [ ] O algoritmo de key scheduling (geração de subchaves)
+- [ ] O algoritmo de ciframento e deciframento
+- [ ] O algoritmo de modo de operação CBC
 
 ---
 # Descrição do trabalho 
