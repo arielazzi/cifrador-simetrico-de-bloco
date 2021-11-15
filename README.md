@@ -1,10 +1,19 @@
-# cifrador-simetrico-de-bloco
+# Cifrador Simétrico de Bloco
 
 ## To-do:
 
 - [ ] O algoritmo de key scheduling (geração de subchaves)
+    - [ ] Definição
+    - [ ] Implementação
+    - [ ] Documentação
 - [ ] O algoritmo de ciframento e deciframento
+    - [ ] Definição
+    - [ ] Implementação
+    - [ ] Documentação
 - [ ] O algoritmo de modo de operação CBC
+    - [ ] Definição
+    - [ ] Implementação
+    - [ ] Documentação
 
 ---
 # Descrição do trabalho 
