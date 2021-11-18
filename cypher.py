@@ -5,7 +5,7 @@ def key_schedule(user_provided_key, permuted_choice):
     keys.append(mix_blocks(bin_user_provided_key, permuted_choice))
     keys.append(mix_blocks(keys[0], permuted_choice))
     keys.append(mix_blocks(keys[1], permuted_choice))
-    
+
     return keys
 
 
@@ -32,4 +32,5 @@ def mix_blocks(bin_user_provided_key, permuted_choice):
     block2 = blocks[8:16]
     block3 = blocks[16:24]
     block4 = blocks[24:32]
-    return block3 + block1 + block4 + block2
+    return block3 + block4 + block2 + block1
+

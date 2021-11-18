@@ -69,4 +69,4 @@ Obs.: não devem ser utilizadas bibliotecas/módulos/componentes que implementem
 # Key Scheduling
 
 
-![](key_scheduling_strategy.png)
+![](key_scheduling_strategy.svg)
