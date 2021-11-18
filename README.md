@@ -63,3 +63,10 @@ Obs.: não devem ser utilizadas bibliotecas/módulos/componentes que implementem
 ## CBC
 
 ![img.png](img.png)
+
+---
+
+# Key Scheduling
+
+
+![](key_scheduling_strategy.png)
