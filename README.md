@@ -1,11 +1,19 @@
-# cifrador-simetrico-de-bloco
+# Cifrador Simétrico de Bloco
 
 ## To-do:
 
-- [ ] Setup
-- [ ] Carregar o arquivo como bin
-- [ ] Coletar valor da chave
-- [ ] Ler o arquivo a cada 48 bits 
+- [ ] **Algoritmo de key scheduling (geração de subchaves)**
+    - [ ] Definição
+    - [ ] Implementação
+    - [ ] Documentação
+- [ ] **Algoritmo de ciframento e deciframento**
+    - [ ] Definição
+    - [ ] Implementação
+    - [ ] Documentação
+- [ ] **Algoritmo de modo de operação CBC**
+    - [ ] Definição
+    - [ ] Implementação
+    - [ ] Documentação
 
 ---
 # Descrição do trabalho 
