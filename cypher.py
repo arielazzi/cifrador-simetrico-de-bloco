@@ -8,10 +8,28 @@ def key_schedule(user_provided_key, permuted_choice):
 
     return keys
 
+def get_blocks(data):
+    blocks = []
+
+    block_size = 48
+
+    inferior_limit = 0
+    upper_limit = block_size
+
+    max_limit = len(data)
+
+    while upper_limit <= max_limit:
+        block = data[inferior_limit:upper_limit]
+        blocks.append(block)
+
+        inferior_limit = upper_limit
+        upper_limit += block_size
+
+    return blocks
 
 def encrypt(keys, data):
-    print('encrypt')
-
+    blocks = get_blocks(data)
+    
 
 def decrypt(keys, data):
     print('decrypt')
