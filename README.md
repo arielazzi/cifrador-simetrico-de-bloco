@@ -3,8 +3,8 @@
 ## To-do:
 
 - [ ] **Algoritmo de key scheduling (geração de subchaves)**
-    - [ ] Definição
-    - [ ] Implementação
+    - [x] Definição
+    - [x] Implementação
     - [ ] Documentação
 - [ ] **Algoritmo de ciframento e deciframento**
     - [ ] Definição
