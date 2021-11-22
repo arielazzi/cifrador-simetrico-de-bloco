@@ -11,7 +11,7 @@ user_provided_key = ''
 while len(user_provided_key.encode('utf-8')) != 4:
     user_provided_key = input("Informe o valor da chave (4 bytes): ")
 
-pc1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+pc1 = [16, 0, 19, 28, 3, 14, 13, 31, 12, 1, 22, 23, 29, 24, 15, 30, 6, 9, 21, 10, 2, 4, 5, 17, 7, 27, 18, 26, 11, 8, 25, 20]
 
 keys = cypher.key_schedule(user_provided_key.encode('utf-8'), pc1)
 print(keys)
