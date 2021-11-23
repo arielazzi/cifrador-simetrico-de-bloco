@@ -28,11 +28,15 @@ def encrypt(keys, data):
 
     #separacao dos blocos em left e right
     for block in output:
+        print()
+        print('initial block')
+        print(block)
         left_part_of_block = block[0:16]
         right_part_of_block = block[16:48]
 
-        # encrypt right part by making xor with first key
         first_key = keys[0]
+        second_key = keys[1]
+        third_key = keys[2]
 
         encrypted_right_part = ''
 
@@ -40,8 +44,30 @@ def encrypt(keys, data):
             encrypted_right_part += xor(right_part_of_block[i], first_key[i])
 
         block = left_part_of_block + encrypted_right_part
+        print('block after first key xor')
+        print(block)
 
+        ## todo: create function to avoid duplication of following lines
+        right_part_of_block = encrypted_right_part
+        encrypted_right_part = ''
 
+        for i in range(0, len(right_part_of_block)):
+            encrypted_right_part += xor(right_part_of_block[i], second_key[i])
+
+        block = left_part_of_block + encrypted_right_part
+        print('block after second key xor')
+        print(block)
+
+        ## todo: create function to avoid duplication of following lines
+        right_part_of_block = encrypted_right_part
+        encrypted_right_part = ''
+
+        for i in range(0, len(right_part_of_block)):
+            encrypted_right_part += xor(right_part_of_block[i], third_key[i])
+
+        block = left_part_of_block + encrypted_right_part
+        print('final block after third key xor')
+        print(block)
 
 
 def decrypt(keys, data):
