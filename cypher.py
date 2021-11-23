@@ -23,16 +23,17 @@ def encrypt(keys, data):
     #blocos
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
     
-    #permutação do arquivo
-    #mix_blocks(fileValue, permutedChoises.PaddingChoises.pc2)
-
     #separacao dos blocos em left e right
     for block in output:
         print()
         print('initial block')
         print(block)
-        left_part_of_block = block[0:16]
-        right_part_of_block = block[16:48]
+
+        #permutacao
+        permuted_block = mix_blocks(block, permutedChoises.PaddingChoises.pc2)
+
+        left_part_of_block = permuted_block[0:16]
+        right_part_of_block = permuted_block[16:48]
 
         first_key = keys[0]
         second_key = keys[1]
@@ -43,9 +44,9 @@ def encrypt(keys, data):
         for i in range(0, len(right_part_of_block)):
             encrypted_right_part += xor(right_part_of_block[i], first_key[i])
 
-        block = left_part_of_block + encrypted_right_part
+        permuted_block = left_part_of_block + encrypted_right_part
         print('block after first key xor')
-        print(block)
+        print(permuted_block)
 
         ## todo: create function to avoid duplication of following lines
         right_part_of_block = encrypted_right_part
@@ -54,9 +55,9 @@ def encrypt(keys, data):
         for i in range(0, len(right_part_of_block)):
             encrypted_right_part += xor(right_part_of_block[i], second_key[i])
 
-        block = left_part_of_block + encrypted_right_part
+        permuted_block = left_part_of_block + encrypted_right_part
         print('block after second key xor')
-        print(block)
+        print(permuted_block)
 
         ## todo: create function to avoid duplication of following lines
         right_part_of_block = encrypted_right_part
@@ -65,9 +66,9 @@ def encrypt(keys, data):
         for i in range(0, len(right_part_of_block)):
             encrypted_right_part += xor(right_part_of_block[i], third_key[i])
 
-        block = left_part_of_block + encrypted_right_part
+        permuted_block = left_part_of_block + encrypted_right_part
         print('final block after third key xor')
-        print(block)
+        print(permuted_block)
 
 
 def decrypt(keys, data):
