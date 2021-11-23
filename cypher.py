@@ -35,41 +35,22 @@ def encrypt(keys, data):
         left_part_of_block = permuted_block[0:16]
         right_part_of_block = permuted_block[16:48]
 
-        first_key = keys[0]
-        second_key = keys[1]
-        third_key = keys[2]
-
+        keyIndex = 0
         encrypted_right_part = ''
 
-        for i in range(0, len(right_part_of_block)):
-            encrypted_right_part += xor(right_part_of_block[i], first_key[i])
+        while( keyIndex < 3):
+            for i in range(0, len(right_part_of_block)):
+                encrypted_right_part += xor(right_part_of_block[i], keys[keyIndex][i])
 
-        permuted_block = left_part_of_block + encrypted_right_part
-        print('block after first key xor')
-        print(permuted_block)
-
-        ## todo: create function to avoid duplication of following lines
-        right_part_of_block = encrypted_right_part
-        encrypted_right_part = ''
-
-        for i in range(0, len(right_part_of_block)):
-            encrypted_right_part += xor(right_part_of_block[i], second_key[i])
-
-        permuted_block = left_part_of_block + encrypted_right_part
-        print('block after second key xor')
-        print(permuted_block)
-
-        ## todo: create function to avoid duplication of following lines
-        right_part_of_block = encrypted_right_part
-        encrypted_right_part = ''
-
-        for i in range(0, len(right_part_of_block)):
-            encrypted_right_part += xor(right_part_of_block[i], third_key[i])
-
-        permuted_block = left_part_of_block + encrypted_right_part
-        print('final block after third key xor')
-        print(permuted_block)
-
+            permuted_block = left_part_of_block + encrypted_right_part
+            print('block after ' + str(keyIndex + 1) + ' key xor')
+            print(permuted_block)
+            right_part_of_block = encrypted_right_part
+            encrypted_right_part = ''
+            keyIndex = keyIndex + 1
+    
+    print("encrypt end")
+        
 
 def decrypt(keys, data):
     print('decrypt')
