@@ -1,4 +1,5 @@
 import permutedChoises
+import cbc
 
 def key_schedule(user_provided_key, permuted_choice):
     keys = []
@@ -17,6 +18,7 @@ def encrypt(keys, data):
 
     #padding
     #preenche com zeros até quantidade de bits ser divisível por 48
+
     while(len(fileValue) % 48 != 0):
         fileValue += '0'
 
@@ -24,12 +26,19 @@ def encrypt(keys, data):
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
 
     encrypted_file_value = ''
-    
+    previousBlock = None
+
     #separacao dos blocos em left e right
     for block in output:
         print()
         print('initial block')
-        #print(block)
+        print(block)
+
+        block = cbc.generate_input_ecc(block, previousBlock)
+        previousBlock = block
+
+        print('initial block 2')
+        print(block)
 
         #permutacao
         permuted_block = mix_blocks(block, permutedChoises.PaddingChoises.pc2)
@@ -64,12 +73,13 @@ def decrypt(keys, data):
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
 
     decrypted_file_bin_value = ''
+    previousBlock = None
       #separacao dos blocos em left e right
     for block in output:
         print()
         print('initial block')
-        #print(block)
 
+        
         left_part_of_block = block[0:16]
         right_part_of_block = block[16:48]
 
@@ -89,6 +99,9 @@ def decrypt(keys, data):
         
         #desfaz permutação
         not_permuted_block = undo_mix_blocks(block)
+        temp = not_permuted_block
+        not_permuted_block = cbc.generate_ouput_ecc(not_permuted_block, previousBlock)
+        previousBlock = temp
 
         decrypted_file_bin_value += not_permuted_block
     print("arquivo decriptado: ")
