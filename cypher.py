@@ -2,7 +2,6 @@ import permutedChoises
 
 def key_schedule(user_provided_key, permuted_choice):
     keys = []
-    print(binary_to_string(user_provided_key))
     bin_user_provided_key = binary_to_string(user_provided_key)
     keys.append(mix_blocks(bin_user_provided_key, permuted_choice))
     keys.append(mix_blocks(keys[0], permuted_choice))
@@ -12,22 +11,25 @@ def key_schedule(user_provided_key, permuted_choice):
 
 def encrypt(keys, data):
     fileValue = binary_to_string(data)
-   
-    print(fileValue)
+
     #padding
     #preenche com zeros até quantidade de bits ser divisível por 48
     while(len(fileValue) % 48 != 0):
         fileValue += '0'
 
     #blocos
-    output=[fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
-    print("blocos")
-    print(output)    
+    output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
+
+    #separacao dos blocos em left e right
+    for block in output:
+        left_part_of_block = block[0:16]
+        right_part_of_block = block[16:48]
+        print(left_part_of_block)
+        print(right_part_of_block)
+
 
     #permutação do arquivo
     #mix_blocks(fileValue, permutedChoises.PaddingChoises.pc2)
-
-    print('encrypt')
 
 
 def decrypt(keys, data):

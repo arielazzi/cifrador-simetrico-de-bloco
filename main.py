@@ -13,6 +13,4 @@ while len(user_provided_key.encode('utf-8')) != 4:
     user_provided_key = input("Informe o valor da chave (4 bytes): ")
 
 keys = cypher.key_schedule(user_provided_key.encode('utf-8'), permutedChoises.PaddingChoises.pc1)
-
-print(keys)
 cypher.encrypt(keys, file.read())
