@@ -59,7 +59,43 @@ def encrypt(keys, data):
         
 
 def decrypt(keys, data):
-    return 'decrypt'
+    fileValue = data
+    #blocos
+    output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
+
+    decrypted_file_bin_value = ''
+      #separacao dos blocos em left e right
+    for block in output:
+        print()
+        print('initial block')
+        #print(block)
+
+        left_part_of_block = block[0:16]
+        right_part_of_block = block[16:48]
+
+        keyIndex = 0
+        decrypted_right_part = ''
+
+        while( keyIndex < 3):
+            for i in range(0, len(right_part_of_block)):
+                decrypted_right_part += xor(right_part_of_block[i], keys[keyIndex][i])
+
+            block = left_part_of_block + decrypted_right_part
+            #print('block after ' + str(keyIndex + 1) + ' key xor')
+            #print(permuted_block)
+            right_part_of_block = decrypted_right_part
+            decrypted_right_part = ''
+            keyIndex = keyIndex + 1
+        
+        #desfaz permutação
+        not_permuted_block = undo_mix_blocks(block)
+
+        decrypted_file_bin_value += not_permuted_block
+    print("arquivo decriptado: ")
+    print(decrypted_file_bin_value)
+    decrypted_file_value = decode_binary_string(decrypted_file_bin_value)
+    print("decrypt end")
+    return decrypted_file_value
 
 
 def binary_to_string(binary):
@@ -68,6 +104,8 @@ def binary_to_string(binary):
         binary_text += format(binary[letter], "b").zfill(8)
     return binary_text
 
+def decode_binary_string(string):
+    return ''.join(chr(int(string[i*8:i*8+8],2)) for i in range(len(string)//8))
 
 def mix_blocks(bin_user_provided_key, permuted_choice):
     blocks = ''
@@ -88,5 +126,17 @@ def mix_blocks(bin_user_provided_key, permuted_choice):
     block4 = blocks[24:32]
     block5 = blocks[32:40]
     block6 = blocks[40:48]
-    return block6 + block3 + block5 + block4 + block2 + block1    
+    return block6 + block3 + block5 + block4 + block2 + block1
+
+def undo_mix_blocks(bin_user_provided_key):   
+    block1 = bin_user_provided_key[0:8]
+    block2 = bin_user_provided_key[8:16]
+    block3 = bin_user_provided_key[16:24]
+    block4 = bin_user_provided_key[24:32]
+    block5 = bin_user_provided_key[32:40]
+    block6 = bin_user_provided_key[40:48]
+
+    return block6 + block5 + block2 + block4 + block3 + block1
+
+
 

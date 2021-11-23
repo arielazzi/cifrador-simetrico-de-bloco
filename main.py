@@ -26,7 +26,9 @@ if(operation == 1):
     encrypted_file_text = cypher.encrypt(keys, file.read())
     utils.write_text_in_file(open(file.name.replace('txt','encrypted.txt'), 'w+b'), encrypted_file_text, True)
 elif(operation == 2):
-    decrypted_file_text = cypher.decrypt(keys, file.read())
-    utils.write_text_in_file(open(file.name.replace('txt','decrypted.txt'), 'w+b'), decrypted_file_text, True)
+    decrypted_file_text = cypher.decrypt(keys, utils.binary_file_to_string(file))
+    new_file = open(file.name + '_decrypted.txt', 'w', newline='')
+    new_file.write(decrypted_file_text)
+    new_file.close()
 else:
     print("Fim.")
