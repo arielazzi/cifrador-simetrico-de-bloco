@@ -55,6 +55,7 @@ def encrypt(keys, data):
     print("arquivo encriptado: ")
     print(encrypted_file_value)
     print("encrypt end")
+    return encrypted_file_value
         
 
 def decrypt(keys, data):
