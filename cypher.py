@@ -22,12 +22,14 @@ def encrypt(keys, data):
 
     #blocos
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
+
+    encrypted_file_value = ''
     
     #separacao dos blocos em left e right
     for block in output:
         print()
         print('initial block')
-        print(block)
+        #print(block)
 
         #permutacao
         permuted_block = mix_blocks(block, permutedChoises.PaddingChoises.pc2)
@@ -43,12 +45,15 @@ def encrypt(keys, data):
                 encrypted_right_part += xor(right_part_of_block[i], keys[keyIndex][i])
 
             permuted_block = left_part_of_block + encrypted_right_part
-            print('block after ' + str(keyIndex + 1) + ' key xor')
-            print(permuted_block)
+            #print('block after ' + str(keyIndex + 1) + ' key xor')
+            #print(permuted_block)
             right_part_of_block = encrypted_right_part
             encrypted_right_part = ''
             keyIndex = keyIndex + 1
-    
+
+        encrypted_file_value += permuted_block
+    print("arquivo encriptado: ")
+    print(encrypted_file_value)
     print("encrypt end")
         
 
