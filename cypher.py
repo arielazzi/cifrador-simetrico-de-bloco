@@ -59,7 +59,7 @@ def encrypt(keys, data):
         
 
 def decrypt(keys, data):
-    print('decrypt')
+    return 'decrypt'
 
 
 def binary_to_string(binary):
