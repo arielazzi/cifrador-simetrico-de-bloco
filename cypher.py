@@ -9,6 +9,9 @@ def key_schedule(user_provided_key, permuted_choice):
 
     return keys
 
+def xor(a, b):
+    return '0' if a == b else '1'
+
 def encrypt(keys, data):
     fileValue = binary_to_string(data)
 
@@ -19,17 +22,26 @@ def encrypt(keys, data):
 
     #blocos
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
+    
+    #permutação do arquivo
+    #mix_blocks(fileValue, permutedChoises.PaddingChoises.pc2)
 
     #separacao dos blocos em left e right
     for block in output:
         left_part_of_block = block[0:16]
         right_part_of_block = block[16:48]
-        print(left_part_of_block)
-        print(right_part_of_block)
+
+        # encrypt right part by making xor with first key
+        first_key = keys[0]
+
+        encrypted_right_part = ''
+
+        for i in range(0, len(right_part_of_block)):
+            encrypted_right_part += xor(right_part_of_block[i], first_key[i])
+
+        block = left_part_of_block + encrypted_right_part
 
 
-    #permutação do arquivo
-    #mix_blocks(fileValue, permutedChoises.PaddingChoises.pc2)
 
 
 def decrypt(keys, data):
