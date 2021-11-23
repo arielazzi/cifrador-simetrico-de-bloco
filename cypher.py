@@ -17,7 +17,7 @@ def encrypt(keys, data):
     #padding
     #preenche com zeros até quantidade de bits ser divisível por 48
     while(len(fileValue) % 48 != 0):
-        fileValue.zfill(48 - len(fileValue))
+        fileValue += '0'
 
     #blocos
     output=[fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
