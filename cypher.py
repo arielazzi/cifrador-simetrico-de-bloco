@@ -18,9 +18,11 @@ def encrypt(keys, data):
 
     #padding
     #preenche com zeros até quantidade de bits ser divisível por 48
-
+    initial_file_len = len(fileValue)
     while(len(fileValue) % 48 != 0):
         fileValue += '0'
+
+    final_file_len = len(fileValue) - initial_file_len
 
     #blocos
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
@@ -64,11 +66,11 @@ def encrypt(keys, data):
     print("arquivo encriptado: ")
     print(encrypted_file_value)
     print("encrypt end")
-    return encrypted_file_value
-        
+    return bin(final_file_len)[2:].zfill(8) + encrypted_file_value
 
 def decrypt(keys, data):
-    fileValue = data
+    padding_size = int(data[0:8], 2)
+    fileValue = data[8:]
     #blocos
     output = [fileValue[i:i + 48] for i in range(0, len(fileValue), 48)]
 
@@ -106,7 +108,7 @@ def decrypt(keys, data):
         decrypted_file_bin_value += not_permuted_block
     print("arquivo decriptado: ")
     print(decrypted_file_bin_value)
-    decrypted_file_value = decode_binary_string(decrypted_file_bin_value)
+    decrypted_file_value = decode_binary_string(decrypted_file_bin_value[:len(decrypted_file_bin_value) - padding_size])
     print("decrypt end")
     return decrypted_file_value
 
