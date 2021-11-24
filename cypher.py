@@ -32,15 +32,9 @@ def encrypt(keys, data):
 
     #separacao dos blocos em left e right
     for block in output:
-        print()
-        print('initial block')
-        print(block)
 
         block = cbc.generate_input_ecc(block, previousBlock)
         previousBlock = block
-
-        print('initial block 2')
-        print(block)
 
         #permutacao
         permuted_block = mix_blocks(block, permutedChoises.PaddingChoises.pc2)
@@ -56,16 +50,12 @@ def encrypt(keys, data):
                 encrypted_right_part += xor(right_part_of_block[i], keys[keyIndex][i])
 
             permuted_block = left_part_of_block + encrypted_right_part
-            #print('block after ' + str(keyIndex + 1) + ' key xor')
-            #print(permuted_block)
             right_part_of_block = encrypted_right_part
             encrypted_right_part = ''
             keyIndex = keyIndex + 1
 
         encrypted_file_value += permuted_block
-    print("arquivo encriptado: ")
-    print(encrypted_file_value)
-    print("encrypt end")
+
     return bin(final_file_len)[2:].zfill(8) + encrypted_file_value
 
 def decrypt(keys, data):
@@ -78,10 +68,7 @@ def decrypt(keys, data):
     previousBlock = None
       #separacao dos blocos em left e right
     for block in output:
-        print()
-        print('initial block')
 
-        
         left_part_of_block = block[0:16]
         right_part_of_block = block[16:48]
 
@@ -93,8 +80,6 @@ def decrypt(keys, data):
                 decrypted_right_part += xor(right_part_of_block[i], keys[keyIndex][i])
 
             block = left_part_of_block + decrypted_right_part
-            #print('block after ' + str(keyIndex + 1) + ' key xor')
-            #print(permuted_block)
             right_part_of_block = decrypted_right_part
             decrypted_right_part = ''
             keyIndex = keyIndex + 1
@@ -106,10 +91,8 @@ def decrypt(keys, data):
         previousBlock = temp
 
         decrypted_file_bin_value += not_permuted_block
-    print("arquivo decriptado: ")
-    print(decrypted_file_bin_value)
+
     decrypted_file_value = decode_binary_string(decrypted_file_bin_value[:len(decrypted_file_bin_value) - padding_size])
-    print("decrypt end")
     return decrypted_file_value
 
 
